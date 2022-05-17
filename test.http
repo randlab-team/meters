@@ -1,0 +1,2 @@
+### GET all meter logs
+GET http://{{host}}/v1/meters/
