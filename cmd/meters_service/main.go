@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/jmoiron/sqlx"
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 	"github.com/rs/zerolog/log"
 
 	"github.com/randlab-team/meters/config"
@@ -18,6 +19,8 @@ func main() {
 	meterHandlers := initHandlers(dbConn)
 
 	e := initEcho()
+	initMiddlewares(e)
+
 	initRoutes(e, meterHandlers)
 
 	if err := e.Start(":8080"); err != nil {
@@ -69,6 +72,10 @@ func initEcho() *echo.Echo {
 	e.HideBanner = true
 
 	return e
+}
+
+func initMiddlewares(e *echo.Echo) {
+	e.Use(middleware.Logger())
 }
 
 func initRoutes(e *echo.Echo, meterHandlers *handlers.Meters) {
