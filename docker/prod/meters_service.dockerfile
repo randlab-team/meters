@@ -8,4 +8,7 @@ FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=0 /app/build/meters_service ./
+
+EXPOSE 8080
+
 CMD ["./meters_service"]
