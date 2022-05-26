@@ -75,7 +75,10 @@ func initEcho() *echo.Echo {
 }
 
 func initMiddlewares(e *echo.Echo) {
+	e.Pre(middleware.AddTrailingSlash())
+
 	e.Use(middleware.Logger())
+	e.Use(middleware.CORS())
 }
 
 func initRoutes(e *echo.Echo, meterHandlers *handlers.Meters) {
