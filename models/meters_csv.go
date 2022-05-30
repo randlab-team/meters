@@ -9,7 +9,7 @@ import (
 
 const (
 	CsvCorrectTrueValue = "Tak"
-	CsvDateLayout       = "01.02.2006 15:04"
+	CsvDateLayout       = "02.01.2006 15:04"
 )
 
 type MeterCsvLog struct {

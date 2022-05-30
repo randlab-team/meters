@@ -17,7 +17,7 @@ const (
             :sn, :correct, :param_name, :index,:date_register,:value,:log_interval,:status
         )`
 
-	getAllQuery = `SELECT * FROM meters;`
+	getAllQuery = `SELECT * FROM meters ORDER BY date_register;`
 )
 
 //go:generate mockgen -destination=../mocks/repository.go . Meters
