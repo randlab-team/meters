@@ -1,6 +1,8 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/jmoiron/sqlx"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -19,7 +21,7 @@ func main() {
 	meterHandlers := initHandlers(dbConn)
 
 	e := initEcho()
-	initMiddlewares(e)
+	initMiddlewares(e, appConfig)
 
 	initRoutes(e, meterHandlers)
 
@@ -74,11 +76,15 @@ func initEcho() *echo.Echo {
 	return e
 }
 
-func initMiddlewares(e *echo.Echo) {
+func initMiddlewares(e *echo.Echo, appConfig config.AppConfig) {
 	e.Pre(middleware.AddTrailingSlash())
 
 	e.Use(middleware.Logger())
-	e.Use(middleware.CORS())
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		Skipper:      middleware.DefaultSkipper,
+		AllowOrigins: appConfig.AllowedOrigins,
+		AllowMethods: []string{http.MethodGet},
+	}))
 }
 
 func initRoutes(e *echo.Echo, meterHandlers *handlers.Meters) {
