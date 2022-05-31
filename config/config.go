@@ -7,11 +7,13 @@ import (
 )
 
 const (
-	dbStringKey = "db_string"
+	dbStringKey       = "db_string"
+	allowedOriginsKey = "allowed_origins"
 )
 
 type AppConfig struct {
-	DbString string `mapstructure:"db_string"`
+	DbString       string   `mapstructure:"db_string"`
+	AllowedOrigins []string `mapstructure:"allowed_origins"`
 }
 
 func InitConfig() (AppConfig, error) {
@@ -38,6 +40,13 @@ func initEnv() error {
 		log.Error().Err(err).Msgf("failed to bind env var: %s", dbStringKey)
 
 		return errors.Wrapf(err, "failed to bind env var: %s", dbStringKey)
+	}
+
+	err = viper.BindEnv(allowedOriginsKey)
+	if err != nil {
+		log.Error().Err(err).Msgf("failed to bind env var: %s", allowedOriginsKey)
+
+		return errors.Wrapf(err, "failed to bind env var: %s", allowedOriginsKey)
 	}
 
 	return nil

@@ -28,6 +28,7 @@ $ make docker-dev-build
 
 ```
 $ export DB_STRING=postgresql://postgres:postgres@localhost:5432/postgres?sslmode=disable
+$ export ALLOWED_ORIGINS=*
 $ ./build/meters_service
 ```
 
@@ -44,8 +45,14 @@ $ make test-import
 
 ### Docker compose
 
+Run whole dev env with fresh docker build:
 ```
 $ make dev-env-up
+```
+
+Run db:
+```
+$ make dev-env-up-db
 ```
 
 ## Web api documentation
