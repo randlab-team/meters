@@ -7,7 +7,7 @@ require (
 	github.com/gocarina/gocsv v0.0.0-20220503141554-3986f9cfe36b
 	github.com/golang/mock v1.6.0
 	github.com/jmoiron/sqlx v1.3.5
-	github.com/labstack/echo/v4 v4.7.2
+	github.com/labstack/echo/v4 v4.9.0
 	github.com/lib/pq v1.10.2
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.26.1
